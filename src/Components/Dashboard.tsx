@@ -59,11 +59,13 @@ const Dashboard = (props: DashboardProps) => {
         };
     }[] | undefined>(undefined);
     useEffect(() => {
-          fr.getUserFarmPosition(new PublicKey(props.publicKey)).then(res => setData(res));
-          fr.getFarmLPPriceInfo().then(res => setPairPrices(res));
-          fr.getTokenPriceInfo().then(res => setTokenPrices(res.tokenPrice));
-          fr.getUserLendingPosition(new PublicKey(props.publicKey)).then(res => setLendingPosition(res));
-          fr.getLendingPoolInfo().then(res => setLendingPoolInfo(res));
+          let active = true;
+          fr.getUserFarmPosition(new PublicKey(props.publicKey)).then(res => active && setData(res));
+          fr.getFarmLPPriceInfo().then(res => active && setPairPrices(res))
+          fr.getTokenPriceInfo().then(res => active && setTokenPrices(res.tokenPrice));
+          fr.getUserLendingPosition(new PublicKey(props.publicKey)).then(res => active && setLendingPosition(res));
+          fr.getLendingPoolInfo().then(res => active && setLendingPoolInfo(res));
+          return () => { active = false };
           },[props.publicKey]);
 
     const getTotalBorrowed = (borrowedTokens : {symbol : string, amount : BN}[]) =>
