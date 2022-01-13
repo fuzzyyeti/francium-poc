@@ -9,7 +9,7 @@ ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
           <Routes>
-            <Route path="/:id" element={<App/>}/>
+            <Route path="/:publicKey" element={<App/>}/>
               <Route path="*" element={<App/>}/>
           </Routes>
       </BrowserRouter>

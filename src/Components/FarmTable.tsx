@@ -11,7 +11,7 @@ import theme from "../Themes/TableTheme";
 const FarmTable = (props : {tableData : { poolName : string, lpTokens: string | undefined , borrowed : string | undefined , total : string | undefined , equity: string | undefined }[]}) => {
     return (    
         <ThemeProvider theme={theme}>
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper}  sx={{borderRadius: 5}}>
             <Table sx={{ minWidth: 650, backgroundColor: 'background.paper', color: 'text.primary'}} aria-label="simple table">
             <TableHead>
                 <TableRow>
@@ -23,9 +23,9 @@ const FarmTable = (props : {tableData : { poolName : string, lpTokens: string | 
                 </TableRow>
             </TableHead>
             <TableBody>
-                {props.tableData.map((row) => (
+                {props.tableData.map((row, index ) => (
                     <TableRow
-                        key={row.poolName}
+                        key={row.poolName + index.toString()}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 }, color: 'text.primary' }}
                     >
                         <TableCell sx={{ color: 'text.primary'}}  component="th" scope="row">

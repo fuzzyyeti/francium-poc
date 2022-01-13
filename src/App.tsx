@@ -10,7 +10,7 @@ function App() {
   const params = useParams<DashboardParams>();
 
   useEffect(() => {
-    if(params.publicKey)
+      if(params.publicKey)
     {
       try {
         const pubkey = new PublicKey(params.publicKey);
